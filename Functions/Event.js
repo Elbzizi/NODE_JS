@@ -1,14 +1,21 @@
-  async function notifyOnDownload(vedio) {
-    try {
-      await downloadVedio(vedio);
-      console.log(`vedio ${vedio} has been dowanloaded`);
-    } catch (error) {
-      console.log(error);
-    }
+function print() {
+    console.log("hello world");
   }
-  console.log("serche for védio");
-  console.log("select védio ");
-  let nameVedeo = "védio1.mp4";
-  notifyOnDownload(nameVedeo);
-  console.log("contune browser védio");
+  
+  var prant = function print() {
+    console.log("hello world");
+  };
+  
+  //katrdam rasha ===
+  (function print() {
+    console.log("hello world last ");
+  })();
+  
+  var print = function () {
+    console.log("hello world");
+  };
+  
+  var print = () => {
+    console.log("hello world");
+  };
   
