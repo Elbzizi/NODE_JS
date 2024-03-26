@@ -1,17 +1,3 @@
-function downloadVedio(name) {
-    return new Promise((resolve, reject) => {
-      var isDownloaded = true;
-  
-      setTimeout(() => {
-        if (isDownloaded) {
-          resolve();
-        } else {
-          reject();
-        }
-      }, 3000);
-    });
-  }
-  
   async function notifyOnDownload(vedio) {
     try {
       await downloadVedio(vedio);
