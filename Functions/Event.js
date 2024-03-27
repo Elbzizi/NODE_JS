@@ -14,3 +14,8 @@ class VedeoManager {
     });
   }
 }
+
+
+var v1=new VedeoManager();
+v1.dowanloaded();
+v1.uploaded();
