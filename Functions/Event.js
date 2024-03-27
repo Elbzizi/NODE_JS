@@ -1,21 +1,10 @@
-function print() {
-    console.log("hello world");
+class VedeoManager {
+  constructor() {}
+
+  uploaded(namevedeo) {
+    console.log(`start downloaded vedeo ${namevedeo}`);
+    setTimeout(() => {
+      console.log(`vedeo ${namevedeo} has been downloaded`);
+    });
   }
-  
-  var prant = function print() {
-    console.log("hello world");
-  };
-  
-  //katrdam rasha ===
-  (function print() {
-    console.log("hello world last ");
-  })();
-  
-  var print = function () {
-    console.log("hello world");
-  };
-  
-  var print = () => {
-    console.log("hello world");
-  };
-  
+}
