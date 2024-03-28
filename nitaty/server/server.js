@@ -12,6 +12,7 @@ app.post("/notes", (req, res) => {
   const body = req.body;
   console.log(body);
   notes.push(body.title);
+  console.log("notes: " + notes);
   res.send(true);
 });
 
