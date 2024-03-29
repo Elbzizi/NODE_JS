@@ -41,6 +41,17 @@ class Database {
         });
     });
   }
+  getNoteById(id) {
+    return new Promise((resolve, reject) => {
+      Note.find({ id: id })
+        .then((data) => {
+          resolve(data);
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    });
+  }
 }
 
 module.exports = Database;
