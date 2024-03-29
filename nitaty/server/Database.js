@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-
+const Note = require("./Schema/note");
 class Database {
   constructor() {
     this.url = "mongodb://localhost:27017/notaty";
@@ -14,6 +14,21 @@ class Database {
       .catch((err) => {
         console.log("Erreur de connexion à la base de données : " + err);
       });
+  }
+  addNote(note) {
+    return new Promise((resolve, reject) => {
+      note["createdDate"] = new Date();
+      note["updatedDate"] = new Date();
+      let newNote = new Note(note);
+      newNote
+        .save()
+        .then((doc) => {
+          resolve(doc);
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    });
   }
 }
 

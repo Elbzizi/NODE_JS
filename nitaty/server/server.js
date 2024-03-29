@@ -7,14 +7,17 @@ const db = new Database();
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-let notes = [];
 
 app.post("/notes", (req, res) => {
   const body = req.body;
   console.log(body);
-  notes.push(body.title);
-  console.log("notes: " + notes);
-  res.send(true);
+  db.addNote(body)
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((err) => {
+      res.status(500).send(err);
+    });
 });
 
 app.get("/notes", (req, res) => {
