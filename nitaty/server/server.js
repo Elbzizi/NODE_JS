@@ -9,9 +9,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.post("/notes", (req, res) => {
-  const body = req.body;
-  console.log(body);
-  db.addNote(body)
+  db.addNote(res.body)
     .then((data) => {
       res.send(data);
     })
@@ -21,7 +19,13 @@ app.post("/notes", (req, res) => {
 });
 
 app.get("/notes", (req, res) => {
-  res.send(notes);
+  db.getNote()
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((err) => {
+      res.status(500).send(err);
+    });
 });
 
 const port = 3000;
