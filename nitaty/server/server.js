@@ -42,6 +42,20 @@ app.get("/note/:id", (req, res) => {
     });
 });
 
+app.put("/notes", (req, res) => {
+  db.UpdateNote(req.body)
+    .then((data) => {
+      if (!data) {
+        res.status(404).send("Dosent exest id" + id);
+      } else {
+        res.send(data);
+      }
+    })
+    .catch((err) => {
+      res.status(500).send(err);
+    });
+});
+
 const port = 3000;
 app.listen(port, () => {
   console.log(`server has starded on port : ${port}...`);
