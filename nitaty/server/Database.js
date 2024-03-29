@@ -43,7 +43,8 @@ class Database {
   }
   getNoteById(id) {
     return new Promise((resolve, reject) => {
-      Note.find({ id: id })
+      // Note.find({ id: id })
+      Note.findById(id)
         .then((data) => {
           resolve(data);
         })

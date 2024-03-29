@@ -27,11 +27,15 @@ app.get("/notes", (req, res) => {
       res.status(500).send(err);
     });
 });
-app.get("/note:id", (req, res) => {
+app.get("/note/:id", (req, res) => {
   const { id } = req.params;
   db.getNoteById(id)
     .then((data) => {
-      res.send(data);
+      if (!data) {
+        res.status(404).send(err);
+      } else {
+        res.send(data);
+      }
     })
     .catch((err) => {
       res.status(500).send(err);
