@@ -9,7 +9,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.post("/notes", (req, res) => {
-  db.addNote(res.body)
+  db.addNote(req.body)
     .then((data) => {
       res.send(data);
     })
@@ -32,7 +32,7 @@ app.get("/note/:id", (req, res) => {
   db.getNoteById(id)
     .then((data) => {
       if (!data) {
-        res.status(404).send(err);
+        res.status(404).send("Dosent exest id" + id);
       } else {
         res.send(data);
       }
