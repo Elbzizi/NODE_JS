@@ -26,7 +26,11 @@ async function GetNoteById(id) {
   const response = await fetch(`${baseUrl}/notes/${id}`);
   return response;
 }
-async function GetNotes() {
-  const response = await fetch(`${baseUrl}/notes`);
+async function GetNotes(title) {
+  let url = `${baseUrl}/notes`;
+  if (title) {
+    url = `${baseUrl}/notes?title=${title}`;
+  }
+  const response = await fetch(url);
   return response;
 }
