@@ -58,6 +58,27 @@ class Database {
       note["updatedDate"] = new Date();
       Note.findByIdAndUpdate(note["_id"], note)
         .then((data) => {
+          // console.log(data);
+          resolve(data);
+        })
+        .catch((err) => reject(err));
+    });
+  }
+  DeleteNote(id) {
+    return new Promise((resolve, reject) => {
+      Note.findByIdAndDelete(id)
+        .then((data) => {
+          console.log(data);
+          resolve(data);
+        })
+        .catch((err) => reject(err));
+    });
+  }
+  getNoteByTitle(title) {
+    return new Promise((resolve, reject) => {
+      const query = { title: { $regex: new RegExp(title, "i") } };
+      Note.find(query)
+        .then((data) => {
           console.log(data);
           resolve(data);
         })

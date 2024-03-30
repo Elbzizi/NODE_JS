@@ -19,15 +19,26 @@ app.post("/notes", (req, res) => {
 });
 
 app.get("/notes", (req, res) => {
-  db.getNote()
-    .then((data) => {
-      res.send(data);
-    })
-    .catch((err) => {
-      res.status(500).send(err);
-    });
+  const { title } = req.query;
+  if (title) {
+    db.getNoteByTitle(title)
+      .then((data) => {
+        res.send(data);
+      })
+      .catch((err) => {
+        res.status(500).send(err);
+      });
+  } else {
+    db.getNote()
+      .then((data) => {
+        res.send(data);
+      })
+      .catch((err) => {
+        res.status(500).send(err);
+      });
+  }
 });
-app.get("/note/:id", (req, res) => {
+app.get("/notes/:id", (req, res) => {
   const { id } = req.params;
   db.getNoteById(id)
     .then((data) => {
@@ -55,7 +66,20 @@ app.put("/notes", (req, res) => {
       res.status(500).send(err);
     });
 });
-
+app.delete("/notes/:id", (req, res) => {
+  const { id } = req.params;
+  db.DeleteNote(id)
+    .then((data) => {
+      if (!data) {
+        res.status(404).send("Dosent exest id" + id);
+      } else {
+        res.send(data);
+      }
+    })
+    .catch((err) => {
+      res.status(500).send(err);
+    });
+});
 const port = 3000;
 app.listen(port, () => {
   console.log(`server has starded on port : ${port}...`);
