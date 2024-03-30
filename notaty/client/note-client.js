@@ -22,3 +22,7 @@ async function DleteNote(id) {
   });
   return response;
 }
+async function AllNote(data) {
+  const response = await fetch(`${baseUrl}/notes`);
+  return response;
+}
