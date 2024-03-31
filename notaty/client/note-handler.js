@@ -23,6 +23,8 @@ function updateNotesTable() {
       cell1.textContent = ele["title"];
       cell2.textContent = ele["content"];
       cell3.textContent = ele["updatedDate"];
+      cell4.innerHTML = ` <a href="#" ><img src="./images/edit.png" width="22px"/></a>
+      <a href="#" ><img src="./images/delete.png" width="22 px"/></a> `;
     });
   });
 }
