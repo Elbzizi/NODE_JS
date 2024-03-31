@@ -15,7 +15,7 @@ function updateNotesTable(titlesearch) {
       cell2.textContent = ele["content"];
       cell3.textContent = ele["updatedDate"];
       cell4.innerHTML = ` <a href="#" ><img src="./images/edit.png" width="22px"/></a>
-      <a href="#"><img src="./images/delete.png" width="22 px"/></a> `;
+      <a onClick="confirmedDeleteNote('${ele["_id"]}')" href="#"><img src="./images/delete.png" width="22 px"/></a> `;
     });
   });
 }
@@ -24,4 +24,15 @@ function updateNotesTable(titlesearch) {
 function searchNotes() {
   title = document.getElementById("searchInput").value;
   updateNotesTable(title);
+}
+
+// ===================================
+
+function confirmedDeleteNote(id) {
+  var action = confirm(`are you sure delete note : ${id}`);
+  if (action) {
+    DleteNote(id);
+  } else {
+    return false;
+  }
 }
