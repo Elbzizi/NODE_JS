@@ -24,13 +24,13 @@ async function DleteNote(id) {
 }
 async function GetNoteById(id) {
   const response = await fetch(`${baseUrl}/notes/${id}`);
-  return response;
+  return response.json();
 }
 async function GetNotes(title) {
   let url = `${baseUrl}/notes`;
   if (title) {
-    url = `${baseUrl}/notes?title=${title}`;
+    url += `/?title=${title}`;
   }
   const response = await fetch(url);
-  return response;
+  return response.json();
 }
