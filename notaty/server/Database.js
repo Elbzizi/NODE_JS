@@ -32,7 +32,7 @@ class Database {
   }
   getNote() {
     return new Promise((resolve, reject) => {
-      Note.find({})
+      Note.find()
         .then((data) => {
           resolve(data);
         })
