@@ -31,7 +31,9 @@ function searchNotes() {
 function confirmedDeleteNote(id) {
   var action = confirm(`are you sure delete note : ${id}`);
   if (action) {
-    DleteNote(id);
+    DleteNote(id).then(() => {
+      updateNotesTable();
+    });
   } else {
     return false;
   }
