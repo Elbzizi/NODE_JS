@@ -1,20 +1,11 @@
-function updateNotesTable() {
+function updateNotesTable(titlesearch) {
   table = document.getElementById("notes-table");
-  GetNotes().then((data) => {
+  row = table.rows.length;
+  while (--row) {
+    table.deleteRow(row);
+  }
+  GetNotes(titlesearch).then((data) => {
     data.forEach((ele) => {
-      // tr = document.createElement("tr");
-      // td1 = document.createElement("td");
-      // td2 = document.createElement("td");
-      // td3 = document.createElement("td");
-      // td4 = document.createElement("td");
-      // td1.appendChild(document.createTextNode(ele["title"]));
-      // td2.appendChild(document.createTextNode(ele["content"]));
-      // td3.appendChild(document.createTextNode(ele["updatedDate"]));
-      // tr.appendChild(td1);
-      // tr.appendChild(td2);
-      // tr.appendChild(td3);
-      // tr.appendChild(td4);
-      // table.appendChild(tr);
       row = table.insertRow(1);
       cell1 = row.insertCell(0);
       cell2 = row.insertCell(1);
@@ -29,3 +20,8 @@ function updateNotesTable() {
   });
 }
 // ===================================
+
+function searchNotes() {
+  title = document.getElementById("searchInput").value;
+  updateNotesTable(title);
+}
