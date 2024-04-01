@@ -14,7 +14,7 @@ function updateNotesTable(titlesearch) {
       cell1.textContent = ele["title"];
       cell2.textContent = ele["content"];
       cell3.textContent = ele["updatedDate"];
-      cell4.innerHTML = ` <a href="#" ><img src="./images/edit.png" width="22px"/></a>
+      cell4.innerHTML = ` <a onClick="editModale('${ele["_id"]}')" href="#" ><img src="./images/edit.png" width="22px"/></a>
       <a onClick="confirmedDeleteNote('${ele["_id"]}')" href="#"><img src="./images/delete.png" width="22 px"/></a> `;
     });
   });
@@ -80,3 +80,22 @@ function saveNewNote() {
       document.getElementById("addError").innerHTML = err;
     });
 }
+//===============update note to data==============
+function editModale(id) {
+  ModalEdit = document.getElementById("editNoteModal");
+
+  closeBtn = document.querySelector("#closeEdit");
+  Cancel = document.querySelector("#cancelEditNoteBtn");
+  closeBtn.onclick = () => {
+    ModalEdit.style.display = "none";
+  };
+  Cancel.onclick = () => {
+    ModalEdit.style.display = "none";
+  };
+  GetNoteById(id).then((data) => {
+    document.getElementById("editTitle").value = data.title;
+    document.getElementById("editContent").value = data.content;
+    ModalEdit.style.display = "block";
+  });
+}
+//===============save Edit Note to data==============
