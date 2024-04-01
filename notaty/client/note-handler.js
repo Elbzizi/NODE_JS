@@ -38,3 +38,7 @@ function confirmedDeleteNote(id) {
     return false;
   }
 }
+//=============================
+function openAddModal() {
+  document.getElementById("addNoteModal").style.display="block";
+}
