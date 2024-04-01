@@ -38,7 +38,45 @@ function confirmedDeleteNote(id) {
     return false;
   }
 }
-//=============================
+//===============Modal==============
 function openAddModal() {
-  document.getElementById("addNoteModal").style.display="block";
+  clearModale();
+  modal = document.getElementById("addNoteModal");
+  modal.style.display = "block";
+  closeBtn = document.querySelector("#closeAdd");
+  Cancel = document.querySelector("#cancelAddNoteBtn");
+  closeBtn.onclick = () => {
+    modal.style.display = "none";
+  };
+  Cancel.onclick = () => {
+    modal.style.display = "none";
+  };
+}
+//===============clear Modale==============
+function clearModale() {
+  document.getElementById("addTitle").value = "";
+  document.getElementById("addContent").value = "";
+  document.getElementById("addError").innerHTML = "";
+}
+//===============add note to data==============
+
+function saveNewNote() {
+  title = document.getElementById("addTitle").value;
+  content = document.getElementById("addContent").value;
+  data = { title: title, content: content };
+  addNote(data)
+    .then((res) => {
+      if (res.ok) {
+        updateNotesTable();
+        clearModale();
+        modal.style.display = "none";
+      } else {
+        res.text().then((err) => {
+          document.getElementById("addError").innerHTML = err;
+        });
+      }
+    })
+    .catch((err) => {
+      document.getElementById("addError").innerHTML = err;
+    });
 }
