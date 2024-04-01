@@ -81,9 +81,8 @@ function saveNewNote() {
     });
 }
 //===============update note to data==============
+ModalEdit = document.getElementById("editNoteModal");
 function editModale(id) {
-  ModalEdit = document.getElementById("editNoteModal");
-
   closeBtn = document.querySelector("#closeEdit");
   Cancel = document.querySelector("#cancelEditNoteBtn");
   closeBtn.onclick = () => {
@@ -95,7 +94,31 @@ function editModale(id) {
   GetNoteById(id).then((data) => {
     document.getElementById("editTitle").value = data.title;
     document.getElementById("editContent").value = data.content;
+    let ID = document.createAttribute("noteid");
+    ID.value = data._id;
+    ModalEdit.setAttributeNode(ID);
     ModalEdit.style.display = "block";
   });
 }
 //===============save Edit Note to data==============
+function saveEditNote() {
+  let data = {
+    _id: ModalEdit.getAttribute("noteid"),
+    title: document.getElementById("editTitle").value,
+    content: document.getElementById("editContent").value,
+  };
+  UpdateNote(data)
+    .then((res) => {
+      if (res.ok) {
+        updateNotesTable();
+        ModalEdit.style.display = "none";
+      } else {
+        res.text().then((err) => {
+          document.getElementById("editError").innerHTML = err;
+        });
+      }
+    })
+    .catch((err) => {
+      document.getElementById("editError").innerHTML = err;
+    });
+}
