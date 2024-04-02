@@ -1,4 +1,4 @@
-function updateNotesTable(titlesearch) {
+function updateNotesTable(id, titlesearch) {
   table = document.getElementById("notes-table");
   row = table.rows.length;
   while (--row) {
@@ -7,6 +7,9 @@ function updateNotesTable(titlesearch) {
   GetNotes(titlesearch).then((data) => {
     data.forEach((ele) => {
       row = table.insertRow(1);
+      idRow = document.createAttribute("id");
+      idRow.value = ele["_id"];
+      row.setAttributeNode(idRow);
       cell1 = row.insertCell(0);
       cell2 = row.insertCell(1);
       cell3 = row.insertCell(2);
@@ -17,13 +20,18 @@ function updateNotesTable(titlesearch) {
       cell4.innerHTML = ` <a onClick="editModale('${ele["_id"]}')" href="#" ><img src="./images/edit.png" width="22px"/></a>
       <a onClick="confirmedDeleteNote('${ele["_id"]}')" href="#"><img src="./images/delete.png" width="22 px"/></a> `;
     });
+  }).then(()=>{
+ if(id){
+ let row= document.getElementById(id);
+ row.setAttribute('style',"animation:new-row 5s")
+ }
   });
 }
 // ===================================
 
 function searchNotes() {
   title = document.getElementById("searchInput").value;
-  updateNotesTable(title);
+  updateNotesTable(undefined, title);
 }
 
 // ===================================
@@ -38,7 +46,6 @@ function confirmedDeleteNote(id) {
     return false;
   }
 }
-
 
 //===============add note to data==============
 
@@ -65,15 +72,16 @@ function saveNewNote() {
 
 //===============save Edit Note to data==============
 function saveEditNote() {
+  const id = ModalEdit.getAttribute("noteid");
   let data = {
-    _id: ModalEdit.getAttribute("noteid"),
+    _id: id,
     title: document.getElementById("editTitle").value,
     content: document.getElementById("editContent").value,
   };
   UpdateNote(data)
     .then((res) => {
       if (res.ok) {
-        updateNotesTable();
+        updateNotesTable(id);
         ModalEdit.style.display = "none";
       } else {
         res.text().then((err) => {
