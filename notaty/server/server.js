@@ -80,7 +80,7 @@ app.delete("/notes/:id", (req, res) => {
       res.status(500).send(err);
     });
 });
-const port = 3000;
+const port =process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`server has starded on port : ${port}...`);
   db.connect();

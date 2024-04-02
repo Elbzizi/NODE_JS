@@ -2,7 +2,9 @@ const mongoose = require("mongoose");
 const Note = require("./Schema/note");
 class Database {
   constructor() {
-    this.url = "mongodb://localhost:27017/notaty";
+    // this.url = "mongodb://localhost:27017/notaty";
+    this.url =process.env.MONGODB_URL ||
+      "mongodb+srv://admin:admin123@cluster0.b5gesb7.mongodb.net/notaty?retryWrites=true&w=majority&appName=Cluster0";
   }
 
   connect() {

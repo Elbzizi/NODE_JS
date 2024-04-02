@@ -1,4 +1,4 @@
-function updateNotesTable(id, titlesearch) {
+function updateNotesTable(id,titlesearch) {
   table = document.getElementById("notes-table");
   row = table.rows.length;
   while (--row) {
